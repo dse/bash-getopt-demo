@@ -24,11 +24,6 @@ get_options () {
             "-")
                 case "$OPTARG" in
 
-                    # support for use of '--' argument to end option parsing
-                    "")
-                        break
-                        ;;
-
                     # --help
                     help)
                         >&2 echo "Parsed option: --$OPTARG"

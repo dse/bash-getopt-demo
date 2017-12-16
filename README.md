@@ -5,9 +5,6 @@ Demonstration of how to use Bash's `getopt` builtin.
 Includes a demonstration of how you can implement GNU-style long
 options.  It's a bit hairy.  See [below](#support-for-long-options).
 
-Also demonstrates the use of the argument `--` by itself to end option
-parsing.
-
 Use of an external GNU getopt executable is outside of the scope of
 this project.  You probably don't want to rely on it being installed
 anyway.
