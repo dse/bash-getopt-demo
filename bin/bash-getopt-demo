@@ -1,0 +1,171 @@
+#!/usr/bin/env bash
+
+usage () { cat <<EOF; }
+usage: $0 [OPTION ...] [ARGUMENT ...]
+options:
+  -h, --help
+  -v, --verbose
+  -1, --one
+  -2, --two[=value]  (short form -2 takes no argument)
+  -3, --three=value  (short form -3 requires an argument)
+EOF
+
+verbose=0
+one=""
+two=""
+three=""
+declare -a options
+
+get_options () {
+    while getopts "122:3:hv-:" OPTION ; do
+        case "$OPTION" in
+
+            # support for long options
+            "-")
+                case "$OPTARG" in
+
+                    # support for use of '--' argument to end option parsing
+                    "")
+                        options+=(--"$OPTARG")
+                        break
+                        ;;
+
+                    # --help
+                    help)
+                        >&2 echo "Parsed option: --$OPTARG"
+                        options+=(--"$OPTARG")
+                        usage; exit 0
+                        ;;
+
+                    # --verbose
+                    verbose)
+                        >&2 echo "Parsed option: --$OPTARG"
+                        options+=(--"$OPTARG")
+                        verbose=$((verbose + 1))
+                        ;;
+
+                    # long option --one taking no arguments
+                    one)
+                        >&2 echo "Parsed option: --$OPTARG"
+                        options+=(--"$OPTARG")
+                        one=one
+                        ;;
+
+                    # long option --two taking an optional argument
+                    # --two[=value]
+                    two)
+                        >&2 echo "Parsed option: --$OPTARG"
+                        options+=(--"$OPTARG")
+                        two=two
+                        ;;
+                    two=*)
+                        >&2 echo "Parsed option: --$OPTARG"
+                        options+=(--"$OPTARG")
+                        two="${OPTARG#*=}"
+                        ;;
+
+                    # long option --three taking a required argument
+                    # --three=value
+                    # --three value
+                    three)
+                        >&2 echo "Parsed option: --$OPTARG ${!OPTIND}"
+                        if (( OPTIND > $# )) ; then
+                            >&2 echo "$0: option '--$OPTARG' requires an argument"
+                            >&2 echo "Type '$0 --help' for help."
+                            exit 1
+                        fi
+                        options+=(--"$OPTARG" "${!OPTIND}")
+                        three=${!OPTIND}
+                        ;;
+                    three=*)
+                        >&2 echo "Parsed option: --$OPTARG ${!OPTIND}"
+                        options+=(--"$OPTARG")
+                        three="${OPTARG#*=}"
+                        ;;
+
+                    *)
+                        >&2 echo "$0: unrecognized option '--$OPTARG'"
+                        >&2 echo "Type '$0 --help' for help."
+                        exit 1
+                        ;;
+                esac
+                ;;
+            h)
+                >&2 echo "Parsed option: -$OPTION"
+                options+=(-"$OPTION")
+                usage; exit 0
+                ;;
+            v)
+                >&2 echo "Parsed option: -$OPTION"
+                options+=(-"$OPTION")
+                verbose=$((verbose + 1))
+                ;;
+            1)
+                >&2 echo "Parsed option: -$OPTION"
+                options+=(-"$OPTION")
+                one=one
+                ;;
+            2)
+                >&2 echo "Parsed option: -$OPTION ($OPTARG)"
+                options+=(-"$OPTION")
+                two=two
+                ;;
+            3)
+                >&2 echo "Parsed option: -$OPTION $OPTARG"
+                options+=(-"$OPTION" "$OPTARG")
+                three="$OPTARG"
+                ;;
+            *)
+                >&2 echo "Type '$0 --help' for help."
+                exit 1
+                ;;
+        esac
+    done
+}
+
+enumerate () {
+    local i
+    local count=0
+    for i ; do
+        count=$((count + 1))
+        printf "  %2d. %q\n" $count "$i"
+    done
+}
+
+main () {
+    echo "verbosity level is $verbose"
+    echo "one=$one"
+    echo "two=$two"
+    echo "three=$three"
+    if (( ${#options[@]} )) ; then
+        echo "${#options[@]} option arguments:"
+        enumerate "${options[@]}"
+    else
+        echo "no option arguments"
+    fi
+    if (( $# )) ; then
+        echo "$# remaining positional arguments:"
+        enumerate "$@"
+    else
+        echo "no remaining positional arguments"
+    fi
+}
+
+echo "---"
+echo "This is the program:"
+echo "  $0"
+if (( $# )) ; then
+    echo "invoked with the following arguments:"
+    echo -n " "
+    for i ; do
+        printf " %q" "$i"
+    done
+    echo ""
+else
+    echo "invoked with no arguments"
+fi
+
+get_options "$@"
+shift $((OPTIND - 1))
+
+main "$@"

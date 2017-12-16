@@ -1,0 +1,303 @@
+---
+This is the program:
+  bin/bash-getopt-demo
+invoked with no arguments
+verbosity level is 0
+one=
+two=
+three=
+no option arguments
+no remaining positional arguments
+---
+This is the program:
+  bin/bash-getopt-demo
+invoked with the following arguments:
+  --help
+Parsed option: --help
+usage: bin/bash-getopt-demo [OPTION ...] [ARGUMENT ...]
+options:
+  -h, --help
+  -v, --verbose
+  -1, --one
+  -2, --two[=value]  (short form -2 takes no argument)
+  -3, --three=value  (short form -3 requires an argument)
+---
+This is the program:
+  bin/bash-getopt-demo
+invoked with the following arguments:
+  --verbose -- --verbose one two three
+Parsed option: --verbose
+verbosity level is 1
+one=
+two=
+three=
+1 option arguments:
+   1. --verbose
+4 remaining positional arguments:
+   1. --verbose
+   2. one
+   3. two
+   4. three
+---
+This is the program:
+  bin/bash-getopt-demo
+invoked with the following arguments:
+  -1234
+Parsed option: -1
+Parsed option: -2 ()
+Parsed option: -3 4
+verbosity level is 0
+one=one
+two=two
+three=4
+4 option arguments:
+   1. -1
+   2. -2
+   3. -3
+   4. 4
+no remaining positional arguments
+---
+This is the program:
+  bin/bash-getopt-demo
+invoked with the following arguments:
+  -1 -2 -3 4
+Parsed option: -1
+Parsed option: -2 ()
+Parsed option: -3 4
+verbosity level is 0
+one=one
+two=two
+three=4
+4 option arguments:
+   1. -1
+   2. -2
+   3. -3
+   4. 4
+no remaining positional arguments
+---
+This is the program:
+  bin/bash-getopt-demo
+invoked with the following arguments:
+  --one --two --two=TWO --three=THREE
+Parsed option: --one
+Parsed option: --two
+Parsed option: --two=TWO
+Parsed option: --three=THREE 
+verbosity level is 0
+one=one
+two=TWO
+three=THREE
+4 option arguments:
+   1. --one
+   2. --two
+   3. --two=TWO
+   4. --three=THREE
+no remaining positional arguments
+---
+This is the program:
+  bin/bash-getopt-demo
+invoked with the following arguments:
+  -123Z
+Parsed option: -1
+Parsed option: -2 ()
+Parsed option: -3 Z
+verbosity level is 0
+one=one
+two=two
+three=Z
+4 option arguments:
+   1. -1
+   2. -2
+   3. -3
+   4. Z
+no remaining positional arguments
+---
+This is the program:
+  bin/bash-getopt-demo
+invoked with the following arguments:
+  --one --zed --two
+Parsed option: --one
+bin/bash-getopt-demo: unrecognized option '--zed'
+Type 'bin/bash-getopt-demo --help' for help.
+---
+This is the program:
+  bin/bash-getopt-demo
+invoked with the following arguments:
+  '' one \'two\' \"three\" four\ five \'six\ seven\' \"eight\ nine\"
+verbosity level is 0
+one=
+two=
+three=
+no option arguments
+7 remaining positional arguments:
+   1. ''
+   2. one
+   3. \'two\'
+   4. \"three\"
+   5. four\ five
+   6. \'six\ seven\'
+   7. \"eight\ nine\"
+---
+This is the program:
+  bin/bash-getopt-demo
+invoked with the following arguments:
+  \  \! \" \# \$ % \& \' \( \) \* + \, - . /
+verbosity level is 0
+one=
+two=
+three=
+no option arguments
+16 remaining positional arguments:
+   1. \ 
+   2. \!
+   3. \"
+   4. \#
+   5. \$
+   6. %
+   7. \&
+   8. \'
+   9. \(
+  10. \)
+  11. \*
+  12. +
+  13. \,
+  14. -
+  15. .
+  16. /
+---
+This is the program:
+  bin/bash-getopt-demo
+invoked with the following arguments:
+  : \; \< = \> \? @ \[ \\ \] \^ _ \` \{ \| \} \~
+verbosity level is 0
+one=
+two=
+three=
+no option arguments
+17 remaining positional arguments:
+   1. :
+   2. \;
+   3. \<
+   4. =
+   5. \>
+   6. \?
+   7. @
+   8. \[
+   9. \\
+  10. \]
+  11. \^
+  12. _
+  13. \`
+  14. \{
+  15. \|
+  16. \}
+  17. \~
+---
+This is the program:
+  bin/bash-getopt-demo
+invoked with the following arguments:
+  $'\a' $'\b' $'\E' $'\E' $'\f' $'\n' $'\r' $'\t' $'\v'
+verbosity level is 0
+one=
+two=
+three=
+no option arguments
+9 remaining positional arguments:
+   1. $'\a'
+   2. $'\b'
+   3. $'\E'
+   4. $'\E'
+   5. $'\f'
+   6. $'\n'
+   7. $'\r'
+   8. $'\t'
+   9. $'\v'
+---
+This is the program:
+  bin/bash-getopt-demo
+invoked with the following arguments:
+  '' $'\001' $'\002' $'\003' $'\004' $'\005' $'\006' $'\a'
+verbosity level is 0
+one=
+two=
+three=
+no option arguments
+8 remaining positional arguments:
+   1. ''
+   2. $'\001'
+   3. $'\002'
+   4. $'\003'
+   5. $'\004'
+   6. $'\005'
+   7. $'\006'
+   8. $'\a'
+---
+This is the program:
+  bin/bash-getopt-demo
+invoked with the following arguments:
+  $'\b' $'\t' $'\n' $'\v' $'\f' $'\r' $'\016' $'\017'
+verbosity level is 0
+one=
+two=
+three=
+no option arguments
+8 remaining positional arguments:
+   1. $'\b'
+   2. $'\t'
+   3. $'\n'
+   4. $'\v'
+   5. $'\f'
+   6. $'\r'
+   7. $'\016'
+   8. $'\017'
+---
+This is the program:
+  bin/bash-getopt-demo
+invoked with the following arguments:
+  $'\020' $'\021' $'\022' $'\023' $'\024' $'\025' $'\026' $'\027'
+verbosity level is 0
+one=
+two=
+three=
+no option arguments
+8 remaining positional arguments:
+   1. $'\020'
+   2. $'\021'
+   3. $'\022'
+   4. $'\023'
+   5. $'\024'
+   6. $'\025'
+   7. $'\026'
+   8. $'\027'
+---
+This is the program:
+  bin/bash-getopt-demo
+invoked with the following arguments:
+  $'\030' $'\031' $'\032' $'\E' $'\034' $'\035' $'\036' $'\037'
+verbosity level is 0
+one=
+two=
+three=
+no option arguments
+8 remaining positional arguments:
+   1. $'\030'
+   2. $'\031'
+   3. $'\032'
+   4. $'\E'
+   5. $'\034'
+   6. $'\035'
+   7. $'\036'
+   8. $'\037'
+---
+This is the program:
+  bin/bash-getopt-demo
+invoked with the following arguments:
+  $'\240' $'\240'
+verbosity level is 0
+one=
+two=
+three=
+no option arguments
+2 remaining positional arguments:
+   1. $'\240'
+   2. $'\240'

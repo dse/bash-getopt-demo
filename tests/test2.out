@@ -1,0 +1,15 @@
+---
+This is the program:
+  bin/bash-getopt-demo
+invoked with the following arguments:
+  $'\034' ¡ — 💩
+verbosity level is 0
+one=
+two=
+three=
+no option arguments
+4 remaining positional arguments:
+   1. $'\034'
+   2. ¡
+   3. —
+   4. 💩
