@@ -26,7 +26,6 @@ get_options () {
 
                     # support for use of '--' argument to end option parsing
                     "")
-                        options+=(--"$OPTARG")
                         break
                         ;;
 
